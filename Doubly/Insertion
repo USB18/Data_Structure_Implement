@@ -1,0 +1,119 @@
+package Doubly_Insertion;
+
+class Node {
+	int data;
+	Node previous;
+	Node next;
+
+	Node(int data) {
+		this.data = data;
+		this.next = null;
+		this.previous = null;
+	}
+}
+
+public class Insertion {
+	Node head;
+
+	public void InsertAtBegin(int data) // Insertion from begining
+	{
+		Node new_node = new Node(data);
+
+		if (head != null) {
+			head.previous = new_node;
+			new_node.next = head;
+			head = new_node;
+		} else {
+			head = new_node;
+		}
+	}
+
+	public void InsertionAtEnd(int data) // Insertion at ending
+	{
+		Node new_node = new Node(data);
+
+		if (head != null) {
+			Node current = head;
+			while (current.next != null) {
+				current = current.next;
+			}
+			current.next = new_node;
+			new_node.previous = current;
+		} else {
+			head = new_node;
+		}
+	}
+
+	public void InsertionAtAny(int position, int data) // Insertion at Any position
+	{
+		Node new_Node = new Node(data);
+		if (head == null) {
+			if (position == 1) {
+				head = new_Node;
+			} else {
+				System.out.println("error");
+			}
+		}
+
+		else {
+			if (position == 1) {
+				new_Node.next = head;
+				head.previous = new_Node;
+				head = new_Node;
+			} else {
+				Node current = head;
+				int count = 1;
+				if (count < (position - 1)) {
+					current = current.next;
+					count++;
+				}
+				Node temp = current.next;
+				new_Node.next = temp;
+				new_Node.previous = current;
+				current.next = new_Node;
+				temp.previous = new_Node;
+			}
+		}
+	}
+
+	public void search(int key) // Searching any key and its position
+	{
+		Node node = head;
+		int i = 1;
+		while (node.next != null) {
+			if (node.data == key) {
+				System.out.println("Found at " + i);
+			}
+			i++;
+			node = node.next;
+		}
+	}
+
+	public void show() // traversing and printing
+	{
+		Node n = head;
+		while (n != null) {
+			System.out.println(n.data);
+			n = n.next;
+		}
+	}
+
+	public static void main(String[] args) {
+		Insertion list = new Insertion();
+		list.InsertAtBegin(10);
+		list.InsertAtBegin(20);
+		list.InsertAtBegin(30);
+		list.InsertAtBegin(40);
+
+		list.InsertionAtEnd(10);
+		list.InsertionAtEnd(12);
+		list.InsertionAtEnd(25);
+		list.InsertionAtEnd(15);
+
+		list.InsertionAtAny(1, 50);
+		list.InsertionAtAny(3, 0);
+
+		list.show();
+		list.search(25);
+	}
+}
