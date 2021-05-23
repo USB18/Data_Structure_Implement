@@ -1,0 +1,85 @@
+
+public class Linkedlist_Implementation {
+	StackNode head;
+
+	class StackNode {
+		int data;
+		StackNode next;
+
+		public StackNode(int data) {
+			this.data = data;
+			this.next = null;
+		}
+	}
+
+	Linkedlist_Implementation() {
+		head = null;
+	}
+
+	public boolean isEmpty() {
+		if (head == null) {
+			return true;
+		}
+		return false;
+	}
+
+	public void push(int data) {
+		StackNode newNode = new StackNode(data);
+
+		if (head == null) {
+			head = newNode;
+		} else {
+			StackNode current = head;
+			head = newNode;
+			newNode.next = current;
+		}
+	}
+
+	public int pop() {
+		if (head == null) {
+			System.out.println("empty");
+		} else {
+			int value = head.data;
+			head = head.next;
+			return value;
+		}
+		return 0;
+	}
+
+	public int peek() {
+		if (head == null) {
+			System.out.println("empty");
+		} else {
+			return head.data;
+		}
+		return 0;
+	}
+
+	public void display() {
+		StackNode n = head;
+		while (n != null) {
+			System.out.println(n.data);
+			n = n.next;
+		}
+	}
+
+	public static void main(String[] args) {
+		Linkedlist_Implementation list = new Linkedlist_Implementation();
+		list.push(20);
+		list.push(25);
+		list.push(30);
+		list.push(40);
+		list.push(10);
+		list.display();
+
+		System.out.println(list.peek());
+
+		list.pop();
+		list.pop();
+
+		list.display();
+
+		list.push(100);
+		list.display();
+	}
+}
