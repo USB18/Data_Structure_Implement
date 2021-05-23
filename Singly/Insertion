@@ -1,0 +1,106 @@
+package Singly_Insertion;
+class Node {
+	int data;
+	Node next;
+
+	Node(int data) {
+		this.data = data;
+	}
+}
+
+public class Insertion {
+	Node head;
+
+	public void InsertAtBegin(int data) // Insertion from begining
+	{
+		Node new_node = new Node(data);
+		if (head == null) {
+			head = new_node;
+		} else {
+			new_node.next = head;
+			head = new_node;
+		}
+	}
+
+	public void InsertAtEnd(int data) // Insertion from ending
+	{
+		Node new_node = new Node(data);
+		if (head == null) {
+			head = new_node;
+		} else {
+			Node current = head;
+			while (current.next != null) {
+				current = current.next;
+			}
+			current.next = new_node;
+		}
+	}
+
+	public void InsertAtAny(int position, int data) // Insertion At Any position
+	{
+		Node newNode = new Node(data);
+		if (head == null) {
+			if (position == 1) {
+				head = newNode;
+			}
+		}
+		if (position < 1) {
+			System.out.println("error");
+		} else {
+			if (position == 1) {
+				newNode.next = head;
+				head = newNode;
+			} else {
+				Node current = head;
+				int count = 1;
+				while (count < (position - 1)) {
+					current = current.next;
+					count++;
+				}
+				Node node = current.next;
+				newNode.next = node;
+				current.next = newNode;
+			}
+		}
+	}
+
+	public void search(int key) // Searching any key at position
+	{
+		Node node = head;
+		int i = 1;
+		while (node.next != null) {
+			if (node.data == key) {
+				System.out.println("Found at " + i);
+			}
+			i++;
+			node = node.next;
+		}
+	}
+
+	public void show() // traversing and printing
+	{
+		Node n = head;
+		while (n != null) {
+			System.out.println(n.data);
+			n = n.next;
+		}
+	}
+
+	public static void main(String[] args) {
+		Insertion list = new Insertion();
+		list.InsertAtBegin(10);
+		list.InsertAtBegin(15);
+		list.InsertAtBegin(5);
+		list.InsertAtBegin(20);
+
+		list.InsertAtEnd(20);
+		list.InsertAtEnd(10);
+		list.InsertAtEnd(200);
+		list.InsertAtEnd(45);
+
+		list.InsertAtAny(2, 100);
+		list.show();
+
+		list.search(100);
+	}
+}
