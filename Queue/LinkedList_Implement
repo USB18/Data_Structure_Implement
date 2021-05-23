@@ -1,0 +1,75 @@
+
+public class Linkedlist_Implementation {
+	
+	QueueNode rear;
+	QueueNode front;
+	 int length;
+	class QueueNode
+	{
+		int data;
+		QueueNode next;
+		public QueueNode(int data) {
+			this.data=data;
+			this.next=null;
+		}
+	}
+	public void enQueue(int data)
+	{
+		QueueNode newNode=new QueueNode(data);
+		
+		if(front==null)
+		{
+			rear=newNode;
+			front=rear;
+		}
+		else
+		{
+			rear.next=newNode;
+			rear=rear.next;
+		}
+		length++;
+	}
+	
+	public int deQueue()
+	{
+		if(front==null)
+		{
+			System.out.println("Empty");
+		}
+		else
+		{
+			int data=front.data;
+			front=front.next;
+			return data;
+		}
+		length--;
+		return 0;
+	}
+	
+	public void display()
+	{
+		QueueNode current=front;
+		while(current!=null)
+		{
+			System.out.println(current.data);
+			current=current.next;
+		}
+	}
+	
+	public static void main(String[] args) {
+		Linkedlist_Implementation imp=new Linkedlist_Implementation();
+		imp.enQueue(10);
+		imp.enQueue(20);
+		imp.enQueue(15);
+		imp.enQueue(05);
+		imp.enQueue(25);
+    
+		imp.display();
+    
+		imp.deQueue();
+		imp.deQueue();
+
+    imp.enQueue(100);
+		imp.display();
+	}
+}
