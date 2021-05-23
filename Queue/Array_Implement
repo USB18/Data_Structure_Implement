@@ -1,0 +1,88 @@
+public class Array_Implementation {
+	int[] queue;
+	int rear;
+	int front;
+	int size;
+	int capacity;
+
+	public Array_Implementation(int capacity) {
+		this.capacity = capacity;
+		queue = new int[capacity];
+		front = 0;
+		rear = 0;
+		size = 0;
+	}
+
+	public boolean isEmpty() {
+		return (size == 0);
+	}
+
+	public boolean isFull() {
+		return (size == capacity);
+	}
+
+	public void enQueue(int data) {
+		if (isFull()) {
+			System.out.println("Queue is Full");
+		} else {
+			queue[rear] = data;
+			rear++;
+			size++;
+		}
+	}
+
+	public int deQueue() {
+		if (isEmpty()) {
+			System.out.println("Queue is Empty");
+		} else {
+			for (int i = 0; i < rear - 1; i++) {
+				queue[i] = queue[i + 1];
+			}
+			if (rear < capacity) {
+				queue[rear] = 0;
+			}
+			rear--;
+			size--;
+		}
+		return queue[front];
+	}
+
+	public int front() {
+		if (rear == front) {
+			System.out.println("Queue is empty");
+		} else {
+			return queue[front];
+		}
+		return 0;
+	}
+
+	public void display() {
+		for (int i = front; i < rear; i++) {
+			System.out.println(queue[i]);
+		}
+	}
+
+	public static void main(String[] args) {
+		Array_Implementation imp = new Array_Implementation(5);
+
+		System.out.println(imp.isEmpty());
+		System.out.println(imp.isFull());
+		imp.enQueue(10);
+		imp.enQueue(20);
+		imp.enQueue(15);
+		imp.enQueue(25);
+		imp.enQueue(05);
+
+		imp.display();
+		System.out.println("size :" + imp.size);
+
+		imp.deQueue();
+		System.out.println("front "+imp.deQueue());
+		imp.display();
+
+		imp.enQueue(100);
+		imp.enQueue(200);
+		imp.display();
+		System.out.println("size :" + imp.size);
+	}
+}
