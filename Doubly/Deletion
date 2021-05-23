@@ -1,0 +1,108 @@
+package Doubly_Deletion;
+
+class Node {
+	int data;
+	Node next;
+	Node previous;
+
+	Node(int data) {
+		this.data = data;
+		this.next = null;
+		this.previous = null;
+	}
+}
+
+public class Deletion {
+	Node head;
+
+	public void Insert(int data) {
+		Node newNode = new Node(data);
+		if (head != null) {
+			Node current = head;
+			while (current.next != null) {
+				current = current.next;
+			}
+			current.next = newNode;
+			newNode.previous = current;
+			newNode.next = null;
+		} else {
+			head = newNode;
+		}
+	}
+
+	public void DeleteAtBegin() {
+		if (head != null) {
+			head = head.next;
+			head.previous = null;
+		} else {
+			System.out.println("No node");
+		}
+
+	}
+
+	public void DeleteAtEnd() {
+		if (head != null) {
+			Node current = head;
+			while (current.next.next != null) {
+				current = current.next;
+			}
+			current.next.previous = null;
+			current.next = null;
+
+		} else {
+			System.out.println("No node");
+		}
+	}
+
+	public void DeleteAtAny(int position) {
+		if (position < 1) {
+			System.out.println("Error");
+		}
+		if (position == 1) {
+			Node temp = head;
+			head = head.next;
+			temp = null;
+		} else {
+			if (head != null) {
+				Node current = head;
+				int count = 1;
+				while (count < (position - 1)) {
+					if (current != null) {
+						current = current.next;
+					}
+					count++;
+				}
+				if(current.next!=null)
+				{
+					current.next.previous=current.previous;
+				}
+				current.previous.next=current.next;
+			} else {
+				System.out.println("No node");
+			}
+		}
+	}
+
+	public void show() {
+		Node n = head;
+		while (n != null) {
+			System.out.println(n.data);
+			n = n.next;
+		}
+	}
+
+	public static void main(String[] args) {
+		Deletion list = new Deletion();
+		list.Insert(5);
+		list.Insert(15);
+		list.Insert(10);
+		list.Insert(25);
+		list.show();
+    
+		list.DeleteAtBegin(); 
+    list.DeleteAtEnd();
+      
+		list.DeleteAtAny(2);
+		list.show();
+	}
+}
